@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { findPets } from "../../services/PetServices";
-//import styles from "./Pets.module.scss";
+import styles from "./Pets.module.css";
 
 export const Pets = () => {
     const [pets, setPets] = useState([]);
@@ -14,7 +14,7 @@ export const Pets = () => {
   return (
     <>
         { pets.map(pet => 
-        <div>
+        <div className={styles.pets}>
             <div>ID: {pet.id}</div>
             <div>Name: {pet.name} </div>
             <div>Age: {pet.age}</div>
