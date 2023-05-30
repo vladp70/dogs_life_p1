@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { findPets } from "../../services/PetServices";
-import styles from "./Pets.module.scss";
+//import styles from "./Pets.module.scss";
 
 export const Pets = () => {
     const [pets, setPets] = useState([]);
 
     useEffect(() => {
-    findPets()
+      findPets()
             .then(({data}) => {
             setPets(data);
             });
@@ -14,7 +14,7 @@ export const Pets = () => {
   return (
     <>
         { pets.map(pet => 
-        <div className={styles.pets}>
+        <div>
             <div>ID: {pet.id}</div>
             <div>Name: {pet.name} </div>
             <div>Age: {pet.age}</div>
