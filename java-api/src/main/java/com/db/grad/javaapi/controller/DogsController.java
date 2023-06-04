@@ -13,15 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 import com.db.grad.javaapi.exception.ResourceNotFoundException;
 import com.db.grad.javaapi.model.Dogs;
-import com.db.grad.javaapi.repository.DogsRepository;
 
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "http://localhost:3000")
 public class DogsController {
-    @Autowired
-    private DogsRepository dogsRepository;
-
     private DogsService dogsService;
 
     @Autowired
