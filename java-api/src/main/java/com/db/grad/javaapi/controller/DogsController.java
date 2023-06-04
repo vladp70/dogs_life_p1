@@ -44,28 +44,22 @@ public class DogsController {
 
     @PostMapping("/dogs")
     public Dogs createDog(@Valid @RequestBody Dogs dogs) {
-        return dogsRepository.saveAndFlush(dogs);
+        return dogsService.saveDogs(dogs);
     }
 
     @PutMapping("/dogs/{id}")
     public ResponseEntity < Dogs > updateDog(@PathVariable(value = "id") Long id,
         @Valid @RequestBody Dogs dogDetails) throws ResourceNotFoundException {
-    	Dogs getDog = dogsRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Dog not found for this id :: " + id));
 
-    	getDog.setName(dogDetails.getName());
-    	getDog.setAge(dogDetails.getAge());
-        final Dogs updatedDogs = dogsRepository.save(getDog);
+        final Dogs updatedDogs = dogsService.updateDogDetails(id, dogDetails);
         return ResponseEntity.ok(updatedDogs);
     }
 
     @DeleteMapping("/dogs/{id}")
     public Map < String, Boolean > deleteDog(@PathVariable(value = "id") Long id)
-    throws Exception {
-    	Dogs dogs = dogsRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Dog not found for this id :: " + id));
+    throws ResourceNotFoundException {
+    	Dogs dogs = dogsService.deleteTheDog(id);
 
-    	dogsRepository.delete(dogs);
         Map < String, Boolean > response = new HashMap <>();
         response.put("deleted", Boolean.TRUE);
         return response;
