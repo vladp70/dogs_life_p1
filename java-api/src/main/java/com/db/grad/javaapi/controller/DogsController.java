@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.db.grad.javaapi.service.DogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,16 +22,23 @@ public class DogsController {
     @Autowired
     private DogsRepository dogsRepository;
 
+    private DogsService dogsService;
+
+    @Autowired
+    public DogsController(DogsService ds)
+    {
+        dogsService = ds;
+    }
+
     @GetMapping("/dogs")
     public List < Dogs > getAllDogs() {
-        return dogsRepository.findAll();
+        return dogsService.getAllDogs();
     }
 
     @GetMapping("/dogs/{id}")
     public ResponseEntity < Dogs > getEmployeeById(@PathVariable(value = "id") Long id)
     throws ResourceNotFoundException {
-        Dogs dogs = dogsRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Dog not found for this id :: " + id));
+        Dogs dogs = dogsService.findDogById(id);
         return ResponseEntity.ok().body(dogs);
     }
 
