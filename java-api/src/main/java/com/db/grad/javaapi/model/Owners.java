@@ -23,6 +23,7 @@ public class Owners {
     }
 
     @Id
+    @Column(name = "owner_id", nullable = false)
     public long getId() {
         return owner_id;
     }
