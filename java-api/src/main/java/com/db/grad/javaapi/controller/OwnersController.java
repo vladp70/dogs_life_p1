@@ -1,7 +1,9 @@
 package com.db.grad.javaapi.controller;
 
 import com.db.grad.javaapi.exception.ResourceNotFoundException;
+import com.db.grad.javaapi.model.DogsAndOwners;
 import com.db.grad.javaapi.model.Owners;
+import com.db.grad.javaapi.repository.DogsAndOwnersRepository;
 import com.db.grad.javaapi.service.OwnersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,9 @@ public class OwnersController {
     private OwnersService ownersService;
 
     @Autowired
+    DogsAndOwnersRepository dogsAndOwnersRepository;
+
+    @Autowired
     public OwnersController(OwnersService ds)
     {
         ownersService = ds;
@@ -27,6 +32,11 @@ public class OwnersController {
     @GetMapping("/owners")
     public List<Owners> getAllDogs() {
         return ownersService.getAllOwners();
+    }
+
+    @GetMapping("/combi")
+    public List<DogsAndOwners> getBoth() {
+        return dogsAndOwnersRepository.findAll();
     }
 
     @GetMapping("/owners/{id}")
