@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Owners {
 
     @Id
-    private long owner_id;
+    private long ownerId;
     private String name;
 
     public Owners() {
@@ -18,17 +18,17 @@ public class Owners {
     }
 
     public Owners(long id, String name, long age) {
-        this.owner_id=id;
+        this.ownerId=id;
         this.name = name;
     }
 
     @Id
     @Column(name = "owner_id", nullable = false)
     public long getId() {
-        return owner_id;
+        return ownerId;
     }
     public void setId(long id) {
-        this.owner_id = id;
+        this.ownerId = id;
     }
 
     @Column(name = "name", nullable = false)

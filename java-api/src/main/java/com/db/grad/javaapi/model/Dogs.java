@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class Dogs {
 
 	@Id
-	private long dogs_id;
+	private long dogId;
     private String name;
     private long age;
 
@@ -18,18 +18,19 @@ public class Dogs {
     }
 
     public Dogs(long id, String name, long age) {
-    	this.dogs_id=id;
+    	this.dogId=id;
         this.name = name;
         this.age = age;
 
     }
 
     @Id
+    @Column(name = "dog_id", nullable = false)
     public long getId() {
-        return dogs_id;
+        return dogId;
     }
     public void setId(long id) {
-        this.dogs_id = id;
+        this.dogId = id;
     }
     
     @Column(name = "name", nullable = false)
