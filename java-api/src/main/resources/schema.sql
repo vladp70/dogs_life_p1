@@ -15,3 +15,7 @@ owner_id INT NOT NULL,
 FOREIGN key
     (owner_id) REFERENCES owners (owner_id)
 );
+
+create view dogs_n_owners as
+select o.name as Owner, d.name as Dog
+from dogs as d inner join owners as o on d.owner_id = o.owner_id;
