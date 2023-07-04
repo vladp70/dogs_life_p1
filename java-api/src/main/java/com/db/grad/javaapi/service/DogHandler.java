@@ -12,13 +12,26 @@ public class DogHandler
         itsDogsRepo = repo;
     }
 
-    public void addDog(Dog theDog)
+    public long addDog(Dog theDog)
     {
-        itsDogsRepo.save( theDog );
+        return itsDogsRepo.save( theDog );
     }
 
     public long getNoOfDogs()
     {
         return itsDogsRepo.count();
+    }
+
+    public boolean removeDog(long uniqueId)
+    {
+        boolean result = false;
+
+        Dog theDog = itsDogsRepo.findById(uniqueId);
+        if(theDog != null)
+        {
+            result = itsDogsRepo.delete(theDog);
+        }
+
+        return  result;
     }
 }

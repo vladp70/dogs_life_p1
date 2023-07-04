@@ -59,4 +59,50 @@ public class DogsHandlerTest
         // assert
         assertEquals( expectedResult, actualResult );
     }
+
+    @Test
+    public  void    add_dog_and_remove_dog_return_number_of_dogs_is_zero()
+    {
+        // arrange
+        DogHandler cut = new DogHandler( itsDogRepo );
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        long uniqueId = cut.addDog( theDog );
+
+        long expectedResult = 0;
+        boolean expectedStatus = true;
+
+
+        // act
+        boolean actualStatus = cut.removeDog( uniqueId);
+        long actualResult = cut.getNoOfDogs();
+
+        // assert
+        assertEquals( expectedStatus, actualStatus);
+        assertEquals( expectedResult, actualResult );
+    }
+
+    // This test covers the other logic path in cut.removeDog()
+    @Test
+    public  void    add_dog_and_remove_dog_that_doess_not_exist_return_number_of_dogs_is_one()
+    {
+        // arrange
+        DogHandler cut = new DogHandler( itsDogRepo );
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        long uniqueId = cut.addDog( theDog );
+
+        long expectedResult = 1;
+        boolean expectedStatus = false;
+
+
+        // act
+        // There is no dog with ID == 33
+        boolean actualStatus = cut.removeDog( 33 );
+        long actualResult = cut.getNoOfDogs();
+
+        // assert
+        assertEquals( expectedStatus, actualStatus);
+        assertEquals( expectedResult, actualResult );
+    }
 }
