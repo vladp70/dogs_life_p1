@@ -3,6 +3,8 @@ package com.db.grad.javaapi.service;
 import com.db.grad.javaapi.model.Dog;
 import com.db.grad.javaapi.repository.DogsRepository;
 
+import java.util.List;
+
 public class DogHandler
 {
     private DogsRepository itsDogsRepo;
@@ -38,5 +40,18 @@ public class DogHandler
     public Dog getDogById(long uniqueId)
     {
         return itsDogsRepo.findById(uniqueId);
+    }
+
+    public Dog getDogByName(String dogsName )
+    {
+        Dog dogToFind = new Dog();
+        dogToFind.setName(dogsName);
+        List<Dog> dogs = itsDogsRepo.findByName(dogToFind);
+        Dog result = null;
+
+        if( dogs.size() == 1)
+            result = dogs.get(0);
+
+        return result;
     }
 }

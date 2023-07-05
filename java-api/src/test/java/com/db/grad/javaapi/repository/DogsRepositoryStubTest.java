@@ -154,6 +154,26 @@ class DogsRepositoryStubTest {
     }
 
     @Test
+    void    count_dogs_in_collection_with_same_name()
+    {
+        // arrange
+        DogsRepositoryStub cut = new DogsRepositoryStub();
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        cut.save( theDog );
+        theDog = new Dog();
+        theDog.setName("Bruno");
+        cut.save( theDog );
+        long expectedResult = 2;
+
+        // act
+        long actualResult = cut.count();
+
+        // assert
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
     void    count_dogs_in_collection_after_change()
     {
         // arrange

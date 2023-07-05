@@ -36,7 +36,6 @@ public class DogsRepositoryStub implements DogsRepository {
         for( Dog theDog: itsDogs)
             if( theDog.getName().equalsIgnoreCase(aDog.getName()) ) {
                 result.add(theDog);
-                break;
             }
 
         return result;

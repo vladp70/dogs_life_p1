@@ -153,4 +153,76 @@ public class DogsHandlerTest
         // assert
         assertNull( actualResult );
     }
+
+    @Test
+    public  void    find_dog_by_name_returns_one_dog()
+    {
+        // arrange
+        DogHandler cut = new DogHandler( itsDogRepo );
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        cut.addDog( theDog );
+        theDog = new Dog();
+        theDog.setName("Frank");
+        cut.addDog( theDog );
+        Dog expectedDog = theDog;
+        String dogToFind = "Frank";
+        theDog = new Dog();
+        theDog.setName("Penny");
+        cut.addDog( theDog );
+
+        // act
+        Dog actualResult = cut.getDogByName( dogToFind );
+
+        // assert
+        assertEquals( expectedDog.getId(), actualResult.getId() );
+        assertEquals( expectedDog.getName(), actualResult.getName() );
+    }
+
+
+    @Test
+    public  void    find_dog_by_name_returns_null_because_many_dogs_with_same_name()
+    {
+        // arrange
+        DogHandler cut = new DogHandler( itsDogRepo );
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        cut.addDog( theDog );
+        theDog = new Dog();
+        theDog.setName("Bruno");
+        cut.addDog( theDog );
+        Dog expectedDog = theDog;
+        String dogToFind = "Bruno";
+        theDog = new Dog();
+        theDog.setName("Penny");
+        cut.addDog( theDog );
+
+        // act
+        Dog actualResult = cut.getDogByName( dogToFind );
+
+        // assert
+        assertNull( actualResult );
+    }
+
+    @Test
+    public  void    find_dog_by_invalid_name_returns_null_dog()
+    {
+        // arrange
+        DogHandler cut = new DogHandler( itsDogRepo );
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        cut.addDog( theDog );
+        theDog = new Dog();
+        theDog.setName("Frank");
+        cut.addDog( theDog );
+        theDog = new Dog();
+        theDog.setName("Penny");
+        cut.addDog( theDog );
+
+        // act
+        Dog actualResult = cut.getDogByName( "Selvyn" );
+
+        // assert
+        assertNull( actualResult );
+    }
 }
