@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class DogsHandlerTest
 {
@@ -104,5 +105,52 @@ public class DogsHandlerTest
         // assert
         assertEquals( expectedStatus, actualStatus);
         assertEquals( expectedResult, actualResult );
+    }
+
+    @Test
+    public  void    find_dog_by_valid_id_returns_one_dog()
+    {
+        // arrange
+        DogHandler cut = new DogHandler( itsDogRepo );
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        cut.addDog( theDog );
+        theDog = new Dog();
+        theDog.setName("Frank");
+        long uniqueId = cut.addDog( theDog );
+        Dog expectedDog = theDog;
+        theDog = new Dog();
+        theDog.setName("Penny");
+        cut.addDog( theDog );
+
+        // act
+        Dog actualResult = cut.getDogById( uniqueId );
+
+        // assert
+        assertEquals( expectedDog.getId(), actualResult.getId() );
+        assertEquals( expectedDog.getName(), actualResult.getName() );
+    }
+
+    @Test
+    public  void    find_dog_by_invalid_id_returns_null_dog()
+    {
+        // arrange
+        DogHandler cut = new DogHandler( itsDogRepo );
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        cut.addDog( theDog );
+        theDog = new Dog();
+        theDog.setName("Frank");
+        long uniqueId = cut.addDog( theDog );
+        Dog expectedDog = theDog;
+        theDog = new Dog();
+        theDog.setName("Penny");
+        cut.addDog( theDog );
+
+        // act
+        Dog actualResult = cut.getDogById( 33 );
+
+        // assert
+        assertNull( actualResult );
     }
 }
