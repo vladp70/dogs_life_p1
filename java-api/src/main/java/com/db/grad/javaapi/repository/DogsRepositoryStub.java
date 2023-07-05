@@ -50,6 +50,7 @@ public class DogsRepositoryStub implements DogsRepository {
             if( theDog.getId() == aDog.getId()) {
                 retrievedDog = theDog;
                 retrievedDog.setName( aDog.getName() );
+                result = retrievedDog.getId();
                 break;
             }
         if( retrievedDog == null )

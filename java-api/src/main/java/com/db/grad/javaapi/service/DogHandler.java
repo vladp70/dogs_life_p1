@@ -54,4 +54,9 @@ public class DogHandler
 
         return result;
     }
+
+    public long updateDogDetails(Dog dogToUpdate)
+    {
+        return itsDogsRepo.save( dogToUpdate );
+    }
 }
