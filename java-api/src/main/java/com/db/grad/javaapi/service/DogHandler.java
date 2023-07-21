@@ -2,11 +2,14 @@ package com.db.grad.javaapi.service;
 
 import com.db.grad.javaapi.model.Dog;
 import com.db.grad.javaapi.repository.DogsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 public class DogHandler
 {
+    @Autowired
     private DogsRepository itsDogsRepo;
 
     public DogHandler(DogsRepository repo)
@@ -14,7 +17,12 @@ public class DogHandler
         itsDogsRepo = repo;
     }
 
-    public long addDog(Dog theDog)
+    public List<Dog> getAllDogs()
+    {
+        return itsDogsRepo.findAll();
+    }
+
+    public Dog addDog(Dog theDog)
     {
         return itsDogsRepo.save( theDog );
     }
@@ -28,10 +36,11 @@ public class DogHandler
     {
         boolean result = false;
 
-        Dog theDog = itsDogsRepo.findById(uniqueId);
-        if(theDog != null)
+        Optional<Dog> theDog = itsDogsRepo.findById(uniqueId);
+        if(theDog.isPresent())
         {
-            result = itsDogsRepo.delete(theDog);
+            itsDogsRepo.delete(theDog.get());
+            result = true;
         }
 
         return  result;
@@ -39,7 +48,7 @@ public class DogHandler
 
     public Dog getDogById(long uniqueId)
     {
-        return itsDogsRepo.findById(uniqueId);
+        return itsDogsRepo.findById(uniqueId).get();
     }
 
     public Dog getDogByName(String dogsName )
@@ -55,7 +64,7 @@ public class DogHandler
         return result;
     }
 
-    public long updateDogDetails(Dog dogToUpdate)
+    public Dog updateDogDetails(Dog dogToUpdate)
     {
         return itsDogsRepo.save( dogToUpdate );
     }
