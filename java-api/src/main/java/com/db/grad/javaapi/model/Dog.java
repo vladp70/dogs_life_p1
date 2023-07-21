@@ -12,6 +12,7 @@ public class Dog
     @Id
     private long id;
     private String name;
+    private long age;
 
     @Id
     @Column(name = "dog_id", nullable = false)
@@ -26,9 +27,15 @@ public class Dog
     public String getName() {
         return name;
     }
-
-    @Column(name = "age", nullable = false)
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(name = "age", nullable = false)
+    public long getAge() {
+        return age;
+    }
+    public void setAge(long age) {
+        this.age = age;
     }
 }
