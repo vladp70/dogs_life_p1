@@ -2,9 +2,7 @@ package com.db.grad.javaapi.controller;
 
 import com.db.grad.javaapi.exception.ResourceNotFoundException;
 import com.db.grad.javaapi.model.Dog;
-import com.db.grad.javaapi.model.Dogs;
 import com.db.grad.javaapi.service.DogHandler;
-import com.db.grad.javaapi.service.DogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
