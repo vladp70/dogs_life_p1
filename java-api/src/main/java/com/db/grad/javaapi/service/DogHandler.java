@@ -9,31 +9,35 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DogHandler
+public class DogHandler implements IDogsService
 {
-    @Autowired
     private DogsRepository itsDogsRepo;
 
-    public DogHandler(DogsRepository repo)
+    @Autowired
+    public DogHandler( DogsRepository dogRepo )
     {
-        itsDogsRepo = repo;
+        itsDogsRepo = dogRepo;
     }
 
+    @Override
     public List<Dog> getAllDogs()
     {
         return itsDogsRepo.findAll();
     }
 
+    @Override
     public Dog addDog(Dog theDog)
     {
         return itsDogsRepo.save( theDog );
     }
 
+    @Override
     public long getNoOfDogs()
     {
         return itsDogsRepo.count();
     }
 
+    @Override
     public boolean removeDog(long uniqueId)
     {
         boolean result = false;
@@ -48,11 +52,13 @@ public class DogHandler
         return  result;
     }
 
+    @Override
     public Dog getDogById(long uniqueId)
     {
         return itsDogsRepo.findById(uniqueId).get();
     }
 
+    @Override
     public Dog getDogByName(String dogsName )
     {
         Dog dogToFind = new Dog();
@@ -66,6 +72,7 @@ public class DogHandler
         return result;
     }
 
+    @Override
     public Dog updateDogDetails(Dog dogToUpdate)
     {
         return itsDogsRepo.save( dogToUpdate );
