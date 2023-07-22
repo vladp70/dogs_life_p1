@@ -15,6 +15,8 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class DogsHandlerTest
@@ -91,6 +93,7 @@ public class DogsHandlerTest
         // assert
         assertEquals( expectedStatus, actualStatus);
         assertEquals( expectedResult, actualResult );
+        verify(itsDogsRepo, times(1)).delete(theDog);
     }
 
     // This test covers the other logic path in cut.removeDog()
@@ -120,6 +123,7 @@ public class DogsHandlerTest
         // assert
         assertEquals( expectedStatus, actualStatus);
         assertEquals( expectedResult, actualResult );
+        verify(itsDogsRepo, times(0)).delete(theDog);
     }
 
     @Test
@@ -170,7 +174,6 @@ public class DogsHandlerTest
         Mockito.when(itsDogsRepo.findById(invalidId)).thenReturn(opt);
 
         // act
-
         assertThrows(NoSuchElementException.class, () -> {
             cut.getDogById( invalidId );
         });
