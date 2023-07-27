@@ -16,6 +16,7 @@ public class DogsHandlerTest {
     public void makeSureRepoIsEmpty() {
         itsDogRepo.deleteAll();
     }
+  
     @Test
     public void add_a_dog_return_number_of_dogs_in_repo_is_one() {
         // arrange
@@ -34,7 +35,7 @@ public class DogsHandlerTest {
     }
 
     @Test
-    public void add_a_dog_get_that_dog_by_name_from_repo() {
+    public void add_a_dog_get_that_dog_by_name_from_repo() {    
         // arrange
         DogHandler cut = new DogHandler(itsDogRepo);
         Dog theDog = new Dog();
@@ -88,5 +89,47 @@ public class DogsHandlerTest {
 
         // assert
         assertEquals( expectedResult, actualResult );
+    }
+
+  
+  public void updateogDetailsWhenDogIsInTheList() {
+        // arrange
+        DogHandler cut = new DogHandler(itsDogRepo);
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        theDog.setId(1);
+        Dog theDog2 = new Dog();
+        theDog2.setName("Scooby");
+        theDog2.setId(1);
+        cut.addDog(theDog);
+
+        long expected = 1;
+
+        // act
+        long actualResult = cut.updateDogDetails(theDog2);
+
+        // assert
+        assertEquals(expected, actualResult);
+    }
+
+    @Test
+    public void updateogDetailsWhenDogIsNotInTheList() {
+        // arrange
+        DogHandler cut = new DogHandler(itsDogRepo);
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        theDog.setId(1);
+        Dog theDog2 = new Dog();
+        theDog2.setName("Scooby");
+        theDog2.setId(2);
+        cut.addDog(theDog);
+
+        long expected = 2;
+
+        // act
+        long actualResult = cut.updateDogDetails(theDog2);
+
+        // assert
+        assertEquals(expected, actualResult);
     }
 }

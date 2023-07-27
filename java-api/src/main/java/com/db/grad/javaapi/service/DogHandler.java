@@ -29,4 +29,8 @@ public class DogHandler {
         } else
             return null;
     }
+    
+    public long updateDogDetails(Dog theDog) {
+        return itsDogRepo.save(theDog);
+    }
 }
