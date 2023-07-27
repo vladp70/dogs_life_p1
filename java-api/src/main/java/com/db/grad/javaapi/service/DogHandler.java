@@ -2,8 +2,8 @@ package com.db.grad.javaapi.service;
 
 import com.db.grad.javaapi.model.Dog;
 import com.db.grad.javaapi.repository.DogsRepository;
-import com.db.grad.javaapi.repository.DogsRepositoryStub;
 
+import java.util.List;
 public class DogHandler {
 
     private DogsRepository itsDogRepo;
@@ -18,5 +18,15 @@ public class DogHandler {
 
     public long getNoOfDogs() {
         return itsDogRepo.count();
+    }
+
+    public Dog getDogByName(String name) {
+        Dog aDog = new Dog();
+        aDog.setName(name);
+        List<Dog> found = itsDogRepo.findByName(aDog);
+        if (found.size() == 1) {
+            return found.get(0);
+        } else
+            return null;
     }
 }
