@@ -32,4 +32,47 @@ public class DogsHandlerTest {
         // assert
         assertEquals( expectedResult, actualResult );
     }
+
+    @Test
+    public void updateogDetailsWhenDogIsInTheList() {
+        // arrange
+        DogHandler cut = new DogHandler(itsDogRepo);
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        theDog.setId(1);
+        Dog theDog2 = new Dog();
+        theDog2.setName("Scooby");
+        theDog2.setId(1);
+        cut.addDog(theDog);
+
+        long expected = 1;
+
+        // act
+        long actualResult = cut.updateDogDetails(theDog2);
+
+        // assert
+        assertEquals(expected, actualResult);
+    }
+
+    @Test
+    public void updateogDetailsWhenDogIsNotInTheList() {
+        // arrange
+        DogHandler cut = new DogHandler(itsDogRepo);
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        theDog.setId(1);
+        Dog theDog2 = new Dog();
+        theDog2.setName("Scooby");
+        theDog2.setId(2);
+        cut.addDog(theDog);
+
+        long expected = 2;
+
+        // act
+        long actualResult = cut.updateDogDetails(theDog2);
+
+        // assert
+        assertEquals(expected, actualResult);
+    }
+
 }
