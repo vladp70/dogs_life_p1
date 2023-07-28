@@ -2,7 +2,6 @@ package com.db.grad.javaapi.service;
 
 import com.db.grad.javaapi.model.Dog;
 import com.db.grad.javaapi.repository.DogsRepository;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,21 +10,18 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class DogsHandlerTest
+public class DogsServiceTest
 {
     @Mock
     private DogsRepository itsDogsRepo;
 
     @InjectMocks
-    private DogHandler cut;
+    private DogService cut;
 
 //    @Test
 //    public  void    add_a_dog_return_number_of_dogs_in_repo_is_one()
