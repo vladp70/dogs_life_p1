@@ -35,6 +35,60 @@ public class DogsHandlerTest {
     }
 
     @Test
+    public void find_dog_by_valid_id_returns_one_dog()
+    {
+        DogHandler cut = new DogHandler(itsDogRepo);
+
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        theDog.setId(1);
+        cut.addDog(theDog);
+
+        theDog = new Dog();
+        theDog.setName("Frank");
+        theDog.setId(2);
+        Dog addedDog = cut.addDog(theDog);
+
+        Dog expectedDog = theDog;
+
+        theDog = new Dog();
+        theDog.setName("Penny");
+        theDog.setId(3);
+        cut.addDog(theDog);
+
+        Dog actualResult = cut.getDogById(addedDog.getId());
+
+        assertEquals(expectedDog.getId(), actualResult.getId());
+        assertEquals(expectedDog.getName(), actualResult.getName());
+    }
+
+    @Test
+    public void find_dog_by_invalid_id_returns_null_dog()
+    {
+        DogHandler cut = new DogHandler(itsDogRepo);
+
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        theDog.setId(1);
+        cut.addDog( theDog );
+
+        theDog = new Dog();
+        theDog.setName("Frank");
+        theDog.setId(2);
+        cut.addDog( theDog );
+
+        theDog = new Dog();
+        theDog.setName("Penny");
+        theDog.setId(3);
+        cut.addDog( theDog );
+
+        long invalidId = 4;
+
+        assertThrows(NoSuchElementException.class, () -> {
+            cut.getDogById(invalidId);
+        });
+
+    @Test
     public void add_a_dog_get_that_dog_by_name_from_repo() {    
         // arrange
         DogHandler cut = new DogHandler(itsDogRepo);
