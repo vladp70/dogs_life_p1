@@ -62,6 +62,7 @@ public class DogsHandlerTest {
         assertEquals(expectedDog.getName(), actualResult.getName());
     }
 
+    @Test
     public void find_dog_by_invalid_id_returns_null_dog()
     {
         DogHandler cut = new DogHandler(itsDogRepo);
