@@ -5,7 +5,7 @@ import com.db.grad.javaapi.model.Dog;
 import java.util.List;
 
 public interface DogsRepository {
-    long save(Dog theDog );
+    Dog save(Dog theDog );
     Dog  findById( long id );
     List<Dog> findByName(Dog theDog );
     boolean delete( Dog theDog );

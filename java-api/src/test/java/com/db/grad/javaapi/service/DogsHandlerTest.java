@@ -2,7 +2,6 @@ package com.db.grad.javaapi.service;
 
 import com.db.grad.javaapi.model.Dog;
 import com.db.grad.javaapi.repository.DogsRepository;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,24 +26,24 @@ public class DogsHandlerTest
     @InjectMocks
     private DogHandler cut;
 
-//    @Test
-//    public  void    add_a_dog_return_number_of_dogs_in_repo_is_one()
-//    {
-//        // arrange
-//        Dog theDog = new Dog();
-//        theDog.setName("Bruno");
-//        Mockito.when(itsDogsRepo.save(theDog)).thenReturn(theDog);
-//        Mockito.when(itsDogsRepo.count()).thenReturn(1L);
-//        cut.addDog( theDog );
-//
-//        int expectedResult = 1;
-//
-//        // act
-//        long actualResult = cut.getNoOfDogs();
-//
-//        // assert
-//        assertEquals( expectedResult, actualResult );
-//    }
+    @Test
+    public  void    add_a_dog_return_number_of_dogs_in_repo_is_one()
+    {
+        // arrange
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        Mockito.when(itsDogsRepo.save(theDog)).thenReturn(theDog);
+        Mockito.when(itsDogsRepo.count()).thenReturn(1L);
+        cut.addDog( theDog );
+
+        int expectedResult = 1;
+
+        // act
+        long actualResult = cut.getNoOfDogs();
+
+        // assert
+        assertEquals( expectedResult, actualResult );
+    }
 
     @Test
     public  void    add_several_dogs_return_number_of_dogs_match_number_added()
@@ -70,7 +69,6 @@ public class DogsHandlerTest
         assertEquals( expectedResult, actualResult );
     }
 
-//    @Ignore
 //    @Test
 //    public  void    add_dog_and_remove_dog_return_number_of_dogs_is_zero()
 //    {
@@ -256,7 +254,6 @@ public class DogsHandlerTest
         assertNull( actualResult );
     }
 
-//    @Ignore
 //    @Test
 //    public  void    update_dog_that_exists_returns_dog_id()
 //    {

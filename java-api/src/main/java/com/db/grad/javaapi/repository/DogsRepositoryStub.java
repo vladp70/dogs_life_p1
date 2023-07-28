@@ -8,12 +8,12 @@ import java.util.List;
 public class DogsRepositoryStub implements DogsRepository {
     private ArrayList<Dog> itsDogs = new ArrayList<>();
 
-    private long addDog(Dog theDog) {
+    private Dog addDog(Dog theDog) {
         long result = 0;
         itsDogs.add(theDog);
         result = itsDogs.size();
         theDog.setId(result);
-        return result;
+        return theDog;
     }
 
     @Override
@@ -42,15 +42,15 @@ public class DogsRepositoryStub implements DogsRepository {
     }
 
     @Override
-    public long save(Dog aDog) {
+    public Dog save(Dog aDog) {
         Dog retrievedDog = null;
-        long result = -1;
+        Dog result = null;
 
         for( Dog theDog: itsDogs)
             if( theDog.getId() == aDog.getId()) {
                 retrievedDog = theDog;
                 retrievedDog.setName( aDog.getName() );
-                result = retrievedDog.getId();
+                result = retrievedDog;
                 break;
             }
         if( retrievedDog == null )

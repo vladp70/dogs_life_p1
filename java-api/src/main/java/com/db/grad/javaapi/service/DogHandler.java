@@ -2,17 +2,23 @@ package com.db.grad.javaapi.service;
 
 import com.db.grad.javaapi.model.Dog;
 import com.db.grad.javaapi.repository.DogsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+@Service
 public class DogHandler {
 
     private DogsRepository itsDogRepo;
+
+    @Autowired
     public DogHandler(DogsRepository repo) {
         itsDogRepo = repo;
 
     }
 
-    public long addDog(Dog theDog) {
+    public Dog addDog(Dog theDog) {
         return itsDogRepo.save(theDog);
     }
 
@@ -30,7 +36,7 @@ public class DogHandler {
             return null;
     }
     
-    public long updateDogDetails(Dog theDog) {
+    public Dog updateDogDetails(Dog theDog) {
         return itsDogRepo.save(theDog);
     }
 }
