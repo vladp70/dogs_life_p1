@@ -15,3 +15,5 @@ create table dogs
     owner_id int NOT NULL,
     FOREIGN key(owner_id) REFERENCES owners (id)
 );
+
+
