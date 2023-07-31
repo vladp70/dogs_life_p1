@@ -6,7 +6,9 @@ import com.db.grad.javaapi.repository.DogsRepositoryStub;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class DogsHandlerTest {
 
@@ -47,7 +49,7 @@ public class DogsHandlerTest {
         theDog = new Dog();
         theDog.setName("Frank");
         theDog.setId(2);
-        Dog addedDog = cut.addDog(theDog);
+        long addedDog = cut.addDog(theDog);
 
         Dog expectedDog = theDog;
 
@@ -56,37 +58,35 @@ public class DogsHandlerTest {
         theDog.setId(3);
         cut.addDog(theDog);
 
-        Dog actualResult = cut.getDogById(addedDog.getId());
+        Dog actualResult = cut.getDogById(addedDog);
 
         assertEquals(expectedDog.getId(), actualResult.getId());
         assertEquals(expectedDog.getName(), actualResult.getName());
     }
 
     @Test
-    public void find_dog_by_invalid_id_returns_null_dog()
-    {
+    public void find_dog_by_invalid_id_returns_null_dog() {
         DogHandler cut = new DogHandler(itsDogRepo);
 
         Dog theDog = new Dog();
         theDog.setName("Bruno");
         theDog.setId(1);
-        cut.addDog( theDog );
+        cut.addDog(theDog);
 
         theDog = new Dog();
         theDog.setName("Frank");
         theDog.setId(2);
-        cut.addDog( theDog );
+        cut.addDog(theDog);
 
         theDog = new Dog();
         theDog.setName("Penny");
         theDog.setId(3);
-        cut.addDog( theDog );
+        cut.addDog(theDog);
 
         long invalidId = 4;
 
-        assertThrows(NoSuchElementException.class, () -> {
-            cut.getDogById(invalidId);
-        });
+        assertNull(cut.getDogById(invalidId));
+    }
 
     @Test
     public void add_a_dog_get_that_dog_by_name_from_repo() {    
@@ -145,8 +145,8 @@ public class DogsHandlerTest {
         assertEquals( expectedResult, actualResult );
     }
 
-  
-  public void updateogDetailsWhenDogIsInTheList() {
+  @Test
+  public void update_dog_details_when_dog_is_in_the_list() {
         // arrange
         DogHandler cut = new DogHandler(itsDogRepo);
         Dog theDog = new Dog();
@@ -167,7 +167,7 @@ public class DogsHandlerTest {
     }
 
     @Test
-    public void updateogDetailsWhenDogIsNotInTheList() {
+    public void update_dog_details_when_dog_is_not_in_the_list() {
         // arrange
         DogHandler cut = new DogHandler(itsDogRepo);
         Dog theDog = new Dog();

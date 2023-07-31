@@ -16,10 +16,9 @@ public class DogHandler {
         return itsDogRepo.save(theDog);
     }
 
-    @Override
     public Dog getDogById(long uniqueId)
     {
-        return itsDogsRepo.findById(uniqueId).get();
+        return itsDogRepo.findById(uniqueId);
     }
 
     public long getNoOfDogs() {
