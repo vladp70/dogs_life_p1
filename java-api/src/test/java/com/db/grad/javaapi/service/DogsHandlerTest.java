@@ -6,9 +6,7 @@ import com.db.grad.javaapi.repository.DogsRepositoryStub;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DogsHandlerTest {
 
@@ -185,5 +183,54 @@ public class DogsHandlerTest {
 
         // assert
         assertEquals(expected, actualResult);
+    }
+
+    @Test
+    public void remove_dog_that_exists() {
+        // arrange
+        DogHandler cut = new DogHandler(itsDogRepo);
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        theDog.setId(1);
+        cut.addDog(theDog);
+        Dog theDog2 = new Dog();
+        theDog2.setName("Scooby");
+        theDog2.setId(2);
+        cut.addDog(theDog2);
+
+        long expected = 1;
+
+        // act
+        boolean result = cut.removeDog(theDog2.getId());
+        long actual = cut.getNoOfDogs();
+
+        // assert
+        assertTrue(result);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void remove_dog_that_does_not_exist() {
+        // arrange
+        DogHandler cut = new DogHandler(itsDogRepo);
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        theDog.setId(1);
+        cut.addDog(theDog);
+        Dog theDog2 = new Dog();
+        theDog2.setName("Scooby");
+        theDog2.setId(2);
+        cut.addDog(theDog2);
+
+        long expected = 2;
+        long id = 3;
+
+        // act
+        boolean result = cut.removeDog(id);
+        long actual = cut.getNoOfDogs();
+
+        // assert
+        assertFalse(result);
+        assertEquals(expected, actual);
     }
 }

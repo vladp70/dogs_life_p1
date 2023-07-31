@@ -38,4 +38,12 @@ public class DogHandler {
     public long updateDogDetails(Dog theDog) {
         return itsDogRepo.save(theDog);
     }
+
+    public boolean removeDog(long id) {
+        if (itsDogRepo.existsById(id)) {
+            return itsDogRepo.delete(itsDogRepo.findById(id));
+        }
+
+        return false;
+    }
 }
