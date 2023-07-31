@@ -5,4 +5,3 @@ CREATE TABLE dogs (
     name VARCHAR(250) NOT NULL,
     age INT NOT NULL
 );
-
