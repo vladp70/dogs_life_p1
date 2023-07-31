@@ -54,4 +54,8 @@ public class DogService {
         }
         return false;
     }
+
+    public List<Dog> getAllDogs() {
+        return itsDogRepo.findAll();
+    }
 }
