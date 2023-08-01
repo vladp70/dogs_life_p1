@@ -2,48 +2,70 @@ package com.db.grad.javaapi.service;
 
 import com.db.grad.javaapi.model.Dog;
 import com.db.grad.javaapi.repository.DogsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-public class DogHandler {
+import java.util.Optional;
 
-    private DogsRepository itsDogRepo;
-    public DogHandler(DogsRepository repo) {
-        itsDogRepo = repo;
+@Service
+public class DogHandler implements IDogsService {
+    private DogsRepository itsDogsRepo;
 
+    @Autowired
+    public DogHandler(DogsRepository dogRepo) {
+        itsDogsRepo = dogRepo;
     }
 
-    public long addDog(Dog theDog) {
-        return itsDogRepo.save(theDog);
+    @Override
+    public List<Dog> getAllDogs() {
+        return itsDogsRepo.findAll();
     }
 
-    public Dog getDogById(long uniqueId)
-    {
-        return itsDogRepo.findById(uniqueId);
+    @Override
+    public Dog addDog(Dog theDog) {
+        return itsDogsRepo.save(theDog);
     }
 
+    @Override
     public long getNoOfDogs() {
-        return itsDogRepo.count();
+        return itsDogsRepo.count();
     }
 
-    public Dog getDogByName(String name) {
-        Dog aDog = new Dog();
-        aDog.setName(name);
-        List<Dog> found = itsDogRepo.findByName(aDog);
-        if (found.size() == 1) {
-            return found.get(0);
-        } else
-            return null;
-    }
-    
-    public long updateDogDetails(Dog theDog) {
-        return itsDogRepo.save(theDog);
-    }
+    @Override
+    public boolean removeDog(long uniqueId) {
+        boolean result = false;
 
-    public boolean removeDog(long id) {
-        if (itsDogRepo.existsById(id)) {
-            return itsDogRepo.delete(itsDogRepo.findById(id));
+        Optional<Dog> theDog = itsDogsRepo.findById(uniqueId);
+        if (theDog.isPresent()) {
+            itsDogsRepo.delete(theDog.get());
+            result = true;
         }
 
-        return false;
+        return result;
     }
+
+    @Override
+    public Dog getDogById(long uniqueId) {
+        return itsDogsRepo.findById(uniqueId).get();
+    }
+
+    @Override
+    public Dog getDogByName(String dogsName) {
+        Dog dogToFind = new Dog();
+        dogToFind.setName(dogsName);
+        List<Dog> dogs = itsDogsRepo.findByName(dogToFind);
+        Dog result = null;
+
+        if (dogs.size() == 1)
+            result = dogs.get(0);
+
+        return result;
+    }
+
+    @Override
+    public Dog updateDogDetails(Dog dogToUpdate) {
+        return itsDogsRepo.save(dogToUpdate);
+    }
+
 }

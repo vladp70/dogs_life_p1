@@ -5,7 +5,7 @@ import com.db.grad.javaapi.model.Dog;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DogsRepositoryStub implements DogsRepository {
+public class DogsRepositoryStub {
     private ArrayList<Dog> itsDogs = new ArrayList<>();
 
     private long addDog(Dog theDog) {
@@ -16,7 +16,6 @@ public class DogsRepositoryStub implements DogsRepository {
         return result;
     }
 
-    @Override
     public Dog findById(long id) {
         Dog result = null;
 
@@ -29,7 +28,6 @@ public class DogsRepositoryStub implements DogsRepository {
         return result;
     }
 
-    @Override
     public List<Dog> findByName(Dog aDog) {
         ArrayList<Dog> result = new ArrayList<>();
 
@@ -41,7 +39,6 @@ public class DogsRepositoryStub implements DogsRepository {
         return result;
     }
 
-    @Override
     public long save(Dog aDog) {
         Dog retrievedDog = null;
         long result = -1;
@@ -59,7 +56,7 @@ public class DogsRepositoryStub implements DogsRepository {
         return result;
     }
 
-    @Override
+
     public boolean delete(Dog aDog) {
         boolean result = false;
         long initialSize = itsDogs.size();
@@ -70,13 +67,12 @@ public class DogsRepositoryStub implements DogsRepository {
         return result;
     }
 
-    @Override
     public  long count()
     {
         return this.itsDogs.size();
     }
 
-    @Override
+
     public  boolean existsById( long id )
     {
         boolean result = false;
@@ -90,7 +86,7 @@ public class DogsRepositoryStub implements DogsRepository {
         return result;
     }
 
-    @Override
+
     public  void    deleteAll()
     {
         itsDogs.clear();
